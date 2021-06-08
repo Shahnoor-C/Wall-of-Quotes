@@ -1,0 +1,19 @@
+ClassName.objects.create(field1="value for field1", field2="value for field2", field with foreignkey= “specify the instance from your one table”, etc.)
+
+Quote.objects.create(author="Allen Iverson",description="We talking about practice though..",user_who_uploaded= User.objects.get(id=1))
+
+Quote.objects.create(author="Bart Simpson",description="Dont have a cow man!",user_who_uploaded= User.objects.get(id=2))
+
+Quote.objects.create(author="Bill Gates",description="Make money",user_who_uploaded= User.objects.get(id=3))
+
+
+ClassName.objects.create(field1=request.POST[“ ”], field2="value for field2"
+
+Quote.objects.create(author=request.POST['author'],description=request.POST['quote'],user_who_uploaded= User.objects.get(id=request.session['loggedinUserid]))
+
+**Queries for Showing manytomany relationship**
+this_ClassName#1= ClassName.objects.get(id=#)
+
+this_user = User.objects.get(id=3)
+this_quote = Quote.objects.get(id=2)
+this_quote.users_who_like.add(this_user)

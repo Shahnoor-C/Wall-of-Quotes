@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome {{loggedinUser.firstName}}!</h1>
+    <a href="/logout">Logout</a> <a href="/user/{{loggedinUser.id}}">Edit my account</a>
+    <h2>Add a quote to the wall of quotes!</h2>
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color :red;">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    
+    
+    <form action="/addQuote" method="post">
+        {% csrf_token %}
+        <p>Author: <input type="text" name="author" id=""></p>
+        <p>Quote: <input type="text" name="quote" id=""></p>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h1>The Wall Of Quotes!</h1>
+    {% for quote in allQuotes %}
+        <h2>{{quote.author}}</h2>
+        <p>{{quote.description}}</p>
+        <p>Posted by:<a href="/showUser/{{quote.user_who_uploaded.id}}">{{quote.user_who_uploaded.firstName}}</a></p>
+        {% if quote.user_who_uploaded ==  loggedinUser %}
+        
+        <button><a href="quotes/{{quote.id}}/delete">Delete</a></button> 
+        {% endif %}
+    {% endfor %}
+    
+    
+</body>
+</html>
